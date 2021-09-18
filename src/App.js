@@ -1,25 +1,49 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  state = {
+    counter: 0,
+    num: 1,
+  }
+
+  handleChange = (e) => {
+    this.setState({num: Number(e.target.value)})
+  }
+
+  addNum = (e) => {
+    this.setState((state) => ({
+      counter: state.counter + state.num
+    }))
+  }
+
+  subNum = (n) => {
+    this.setState((state) => ({
+      counter: state.counter - state.num
+    }))
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <div>
+          <h1 id="title">COUNTER</h1>
+          <h1 id="counter">{this.state.counter}</h1>
+          <div id="control">
+            <button className="btn-floating btn-large waves-effect waves-light blue" onClick={this.addNum}>+</button>
+            <input 
+                id="numInput"
+                name='num'
+                type="number"
+                value={this.state.num}
+                onChange={this.handleChange}
+              />
+            <button className="btn-floating btn-large waves-effect waves-light blue" onClick={this.subNum}>-</button>
+          </div>
+        </div>
+      </div>
+    )
+  }
 }
 
 export default App;
